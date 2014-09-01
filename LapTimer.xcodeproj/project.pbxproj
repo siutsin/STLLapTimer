@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA419364E9A4485BAEABF8C4 /* libPods-LapTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BE462334D34C95B156584C /* libPods-LapTimer.a */; };
 		E0F6E50519B4561900DE7973 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F6E50419B4561900DE7973 /* Foundation.framework */; };
 		E0F6E50719B4561900DE7973 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F6E50619B4561900DE7973 /* CoreGraphics.framework */; };
 		E0F6E50919B4561900DE7973 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F6E50819B4561900DE7973 /* UIKit.framework */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4EA4D4628A8F462E8BF21C3C /* Pods-LapTimer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LapTimer.xcconfig"; path = "Pods/Pods-LapTimer.xcconfig"; sourceTree = "<group>"; };
+		56BE462334D34C95B156584C /* libPods-LapTimer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LapTimer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F6E50119B4561900DE7973 /* LapTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LapTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F6E50419B4561900DE7973 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E0F6E50619B4561900DE7973 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -63,6 +66,7 @@
 				E0F6E50719B4561900DE7973 /* CoreGraphics.framework in Frameworks */,
 				E0F6E50919B4561900DE7973 /* UIKit.framework in Frameworks */,
 				E0F6E50519B4561900DE7973 /* Foundation.framework in Frameworks */,
+				BA419364E9A4485BAEABF8C4 /* libPods-LapTimer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +90,7 @@
 				E0F6E52919B4561900DE7973 /* LapTimerTests */,
 				E0F6E50319B4561900DE7973 /* Frameworks */,
 				E0F6E50219B4561900DE7973 /* Products */,
+				4EA4D4628A8F462E8BF21C3C /* Pods-LapTimer.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +110,7 @@
 				E0F6E50619B4561900DE7973 /* CoreGraphics.framework */,
 				E0F6E50819B4561900DE7973 /* UIKit.framework */,
 				E0F6E52319B4561900DE7973 /* XCTest.framework */,
+				56BE462334D34C95B156584C /* libPods-LapTimer.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,9 +165,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E0F6E53319B4561900DE7973 /* Build configuration list for PBXNativeTarget "LapTimer" */;
 			buildPhases = (
+				869CB3B7F8E44176A7585349 /* Check Pods Manifest.lock */,
 				E0F6E4FD19B4561900DE7973 /* Sources */,
 				E0F6E4FE19B4561900DE7973 /* Frameworks */,
+				E0F6E53919B4584000DE7973 /* ShellScript */,
 				E0F6E4FF19B4561900DE7973 /* Resources */,
+				584E58D97BF64810A8C4FF4B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -244,6 +253,52 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		584E58D97BF64810A8C4FF4B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-LapTimer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		869CB3B7F8E44176A7585349 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E0F6E53919B4584000DE7973 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E0F6E4FD19B4561900DE7973 /* Sources */ = {
@@ -374,6 +429,7 @@
 		};
 		E0F6E53419B4561900DE7973 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EA4D4628A8F462E8BF21C3C /* Pods-LapTimer.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -387,6 +443,7 @@
 		};
 		E0F6E53519B4561900DE7973 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EA4D4628A8F462E8BF21C3C /* Pods-LapTimer.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -457,6 +514,7 @@
 				E0F6E53519B4561900DE7973 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E0F6E53619B4561900DE7973 /* Build configuration list for PBXNativeTarget "LapTimerTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +523,7 @@
 				E0F6E53819B4561900DE7973 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
