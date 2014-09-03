@@ -19,6 +19,7 @@
 
 // Config
 @property (nonatomic) float cooldownPeriod;
+@property (nonatomic) float sensitivity;
 
 @end
 
@@ -40,6 +41,14 @@
         _cooldownPeriod = 2.0;
     }
     return _cooldownPeriod;
+}
+
+- (float)sensitivity
+{
+    if (!_sensitivity) {
+        _sensitivity = 0.1;
+    }
+    return _sensitivity;
 }
 
 #pragma mark - Init
@@ -68,7 +77,7 @@
     [(GPUImageMotionDetector *) filter setMotionDetectionBlock:^(CGPoint motionCentroid, CGFloat motionIntensity, CMTime frameTime)
     {
         @strongify(self)
-        if (motionIntensity > 0.1)
+        if (motionIntensity > self.sensitivity)
         {
             [self lap];
         }
@@ -98,11 +107,12 @@
         self.lapCounter++;
         NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:self.startTime];
         self.startTime = [NSDate date];
-        [self.lapTimeArray addObject:[self stringFromTimeInterval:interval]];
+        [self.lapTimeArray insertObject:[self stringFromTimeInterval:interval] atIndex:0];
         @weakify(self)
         dispatch_async(dispatch_get_main_queue(), ^{
             @strongify(self)
-            [self.tableView reloadData];
+            NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
         });
         DLog(@"interval: %@", [self stringFromTimeInterval:interval]);
     }
@@ -119,11 +129,6 @@
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.lapTimeArray.count;
@@ -138,16 +143,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *reversed = [[self.lapTimeArray reverseObjectEnumerator] allObjects];
-    
-    if (self.lapTimeArray.count > 0)
-    {
-        [cell.textLabel setText:reversed[indexPath.row]];
-    }
-    else
-    {
-        [cell.textLabel setText:@""];
-    }
+    [cell.textLabel setText:self.lapTimeArray.count > 0 ? self.lapTimeArray[indexPath.row] : @""];
 }
 
 #pragma mark - UITableViewDelegate
