@@ -10,4 +10,8 @@
 
 @interface STLViewController : UITableViewController
 
+// Config
+@property (nonatomic) float cooldownPeriod;
+@property (nonatomic) float sensitivity;
+
 @end

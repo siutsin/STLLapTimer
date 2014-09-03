@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="HGn-EW-DaM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="HGn-EW-DaM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
@@ -25,7 +25,13 @@
                             <outlet property="delegate" destination="Wbv-Qq-2fu" id="Xx5-Ki-515"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Lap Timer" id="O4Y-yJ-rf0"/>
+                    <navigationItem key="navigationItem" title="Lap Timer" id="O4Y-yJ-rf0">
+                        <barButtonItem key="rightBarButtonItem" title="Reset" id="CwB-zL-Got">
+                            <connections>
+                                <action selector="didClickReset:" destination="Wbv-Qq-2fu" id="Hf6-Z0-rbw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CU6-OH-QQE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

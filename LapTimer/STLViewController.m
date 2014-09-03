@@ -17,10 +17,6 @@
 @property (nonatomic, getter=isCoolingDown) BOOL cooldown;
 @property (nonatomic) NSInteger lapCounter;
 
-// Config
-@property (nonatomic) float cooldownPeriod;
-@property (nonatomic) float sensitivity;
-
 @end
 
 @implementation STLViewController
@@ -64,6 +60,18 @@
 {
     [self.videoCamera stopCameraCapture];
     [super viewWillDisappear:animated];
+}
+
+#pragma mark - Interaction
+
+- (IBAction)didClickReset:(id)sender
+{
+    [self.lapTimeArray removeAllObjects];
+    [self.tableView reloadData];
+    self.cooldown = NO;
+    self.lapCounter = 0;
+    self.startTime = nil;
+    [self lap];
 }
 
 #pragma mark - Motion Detector
@@ -114,12 +122,12 @@
             NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
         });
-        DLog(@"interval: %@", [self stringFromTimeInterval:interval]);
     }
 }
 
 - (NSString *)stringFromTimeInterval:(NSTimeInterval)interval
 {
+    DLog(@"interval: %f", interval);
     NSInteger ti = (NSInteger)interval;
     NSInteger seconds = ti % 60;
     NSInteger minutes = (ti / 60) % 60;
@@ -137,20 +145,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    [self configureCell:cell forRowAtIndexPath:indexPath];
-    return cell;
-}
-
-- (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [cell.textLabel setText:self.lapTimeArray.count > 0 ? self.lapTimeArray[indexPath.row] : @""];
-}
-
-#pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //
+[cell.textLabel setText:self.lapTimeArray.count > 0 ? self.lapTimeArray[indexPath.row] : @""];    return cell;
 }
 
 @end
