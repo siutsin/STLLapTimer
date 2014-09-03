@@ -18,7 +18,7 @@ Please open the project with Xcode 6 or above.
 
 ## Author
 
-Simon Li, simon824@gmail.com
+[@Simon__Li](https://twitter.com/Simon__LI)
 
 ## License
 
