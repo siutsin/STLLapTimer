@@ -11,12 +11,13 @@
 
 @interface STLViewController ()
 
+@property (weak, nonatomic) IBOutlet GPUImageView *filterView;
+@property (weak, nonatomic) IBOutlet UILabel *titleTimerLabel;
+
 @property (strong, nonatomic) GPUImageVideoCamera *videoCamera;
-@property (strong, nonatomic) GPUImageView *filterView;
 @property (strong, nonatomic) NSDate *startTime;
 @property (strong, nonatomic) NSMutableArray *lapTimeArray;
 @property (strong, nonatomic) NSTimer *timer;
-@property (strong, nonatomic) UILabel *titleTimerLabel;
 @property (nonatomic, getter=isCoolingDown) BOOL cooldown;
 @property (nonatomic) NSInteger lapCounter;
 
@@ -55,8 +56,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self _setupThumbnail];
 
     [self _setupTitleTimer];
     
@@ -96,15 +95,6 @@
     self.lapCounter = 0;
     self.startTime = nil;
     [self lap];
-}
-
-#pragma mark - Thumbnail
-
-- (void)_setupThumbnail
-{
-    if (self.filterView) return;
-    self.filterView = [[GPUImageView alloc] initWithFrame:CGRectMake(100, 100, 110, 90)];
-    [self.view addSubview:self.filterView];
 }
 
 #pragma mark - Motion Detector
@@ -160,13 +150,6 @@
 - (void)_setupTitleTimer
 {
     if (self.timer) [self.timer invalidate];
-    if (!self.titleTimerLabel)
-    {
-        self.titleTimerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
-        [self.titleTimerLabel setText:@"Lap Timer"];
-        [self.titleTimerLabel setTextAlignment:NSTextAlignmentCenter];
-        self.navigationItem.titleView = self.titleTimerLabel;
-    }
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(_updateTimer:) userInfo:nil repeats:YES];
 }
 
