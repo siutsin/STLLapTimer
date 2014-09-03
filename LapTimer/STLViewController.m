@@ -12,6 +12,7 @@
 @interface STLViewController ()
 
 @property (strong, nonatomic) GPUImageVideoCamera *videoCamera;
+@property (strong, nonatomic) GPUImageView *filterView;
 @property (strong, nonatomic) NSDate *startTime;
 @property (strong, nonatomic) NSMutableArray *lapTimeArray;
 @property (strong, nonatomic) NSTimer *timer;
@@ -55,9 +56,16 @@
 {
     [super viewDidLoad];
     
-    [self _setupMotionDetector];
-    
+    [self _setupThumbnail];
+
     [self _setupTitleTimer];
+    
+    [self _setupMotionDetector];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -73,6 +81,11 @@
     [super viewWillDisappear:animated];
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    self.videoCamera.outputImageOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+}
+
 #pragma mark - Interaction
 
 - (IBAction)didClickReset:(id)sender
@@ -85,12 +98,22 @@
     [self lap];
 }
 
+#pragma mark - Thumbnail
+
+- (void)_setupThumbnail
+{
+    if (self.filterView) return;
+    self.filterView = [[GPUImageView alloc] initWithFrame:CGRectMake(100, 100, 110, 90)];
+    [self.view addSubview:self.filterView];
+}
+
 #pragma mark - Motion Detector
 
 - (void)_setupMotionDetector
 {
+    if (self.videoCamera) return;
     self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset352x288 cameraPosition:AVCaptureDevicePositionBack];
-    self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
+    self.videoCamera.outputImageOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     GPUImageMotionDetector *filter = [[GPUImageMotionDetector alloc] init];
     @weakify(self)
     [(GPUImageMotionDetector *) filter setMotionDetectionBlock:^(CGPoint motionCentroid, CGFloat motionIntensity, CMTime frameTime)
@@ -99,6 +122,7 @@
         if (motionIntensity > self.sensitivity) [self lap];
     }];
     [self.videoCamera addTarget:filter];
+    [self.videoCamera addTarget:self.filterView];
     [self.videoCamera startCameraCapture];
 }
 
