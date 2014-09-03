@@ -14,4 +14,7 @@
 @property (nonatomic) float cooldownPeriod;
 @property (nonatomic) float sensitivity;
 
+- (void)lap;
+- (IBAction)didClickReset:(id)sender;
+
 @end

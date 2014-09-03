@@ -14,6 +14,8 @@
 @property (strong, nonatomic) GPUImageVideoCamera *videoCamera;
 @property (strong, nonatomic) NSDate *startTime;
 @property (strong, nonatomic) NSMutableArray *lapTimeArray;
+@property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) UILabel *titleTimerLabel;
 @property (nonatomic, getter=isCoolingDown) BOOL cooldown;
 @property (nonatomic) NSInteger lapCounter;
 
@@ -53,12 +55,21 @@
 {
     [super viewDidLoad];
     
-    [self setupMotionDetector];
+    [self _setupMotionDetector];
+    
+    [self _setupTitleTimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.videoCamera stopCameraCapture];
+    
+    if (self.timer)
+    {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    
     [super viewWillDisappear:animated];
 }
 
@@ -76,7 +87,7 @@
 
 #pragma mark - Motion Detector
 
-- (void)setupMotionDetector
+- (void)_setupMotionDetector
 {
     self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset352x288 cameraPosition:AVCaptureDevicePositionBack];
     self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
@@ -85,10 +96,7 @@
     [(GPUImageMotionDetector *) filter setMotionDetectionBlock:^(CGPoint motionCentroid, CGFloat motionIntensity, CMTime frameTime)
     {
         @strongify(self)
-        if (motionIntensity > self.sensitivity)
-        {
-            [self lap];
-        }
+        if (motionIntensity > self.sensitivity) [self lap];
     }];
     [self.videoCamera addTarget:filter];
     [self.videoCamera startCameraCapture];
@@ -115,7 +123,7 @@
         self.lapCounter++;
         NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:self.startTime];
         self.startTime = [NSDate date];
-        [self.lapTimeArray insertObject:[self stringFromTimeInterval:interval] atIndex:0];
+        [self.lapTimeArray insertObject:[self _stringFromTimeInterval:interval] atIndex:0];
         @weakify(self)
         dispatch_async(dispatch_get_main_queue(), ^{
             @strongify(self)
@@ -125,14 +133,56 @@
     }
 }
 
-- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval
+- (void)_setupTitleTimer
+{
+    if (self.timer) [self.timer invalidate];
+    if (!self.titleTimerLabel)
+    {
+        self.titleTimerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
+        [self.titleTimerLabel setText:@"Lap Timer"];
+        [self.titleTimerLabel setTextAlignment:NSTextAlignmentCenter];
+        self.navigationItem.titleView = self.titleTimerLabel;
+    }
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(_updateTimer:) userInfo:nil repeats:YES];
+}
+
+- (void)_updateTimer:(id)sender
+{
+    if (!self.startTime) return;
+    NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:self.startTime];
+    NSDictionary *timeUnits = [self _timeUnitsForInterval:interval];
+    NSString *title = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",
+                       (long)[timeUnits[@"minutes"] integerValue],
+                       (long)[timeUnits[@"seconds"] integerValue],
+                       (long)[timeUnits[@"centiseconds"] integerValue]];
+    @weakify(self)
+    dispatch_async(dispatch_get_main_queue(), ^{
+        @strongify(self)
+        [self.titleTimerLabel setText:title];
+    });
+}
+
+- (NSString *)_stringFromTimeInterval:(NSTimeInterval)interval
+{
+    NSDictionary *timeUnits = [self _timeUnitsForInterval:interval];
+    return [NSString stringWithFormat:@"Lap: %ld Time: %02ld:%02ld:%02ld",
+            (long)self.lapCounter,
+            (long)[timeUnits[@"minutes"] integerValue],
+            (long)[timeUnits[@"seconds"] integerValue],
+            (long)[timeUnits[@"centiseconds"] integerValue]];
+}
+
+- (NSDictionary*)_timeUnitsForInterval:(NSTimeInterval)interval
 {
     double ti = (double)interval;
     NSInteger minutes = ((NSInteger)ti / 60) % 60;
     NSInteger seconds = (NSInteger)ti % 60;
     NSInteger centiseconds = roundf(fmod(ti, 1) * 100);
-    
-    return [NSString stringWithFormat:@"Lap: %ld Time: %02ld:%02ld:%02ld", (long)self.lapCounter, (long)minutes, (long)seconds, (long)centiseconds];
+    return @{
+             @"minutes" : @(minutes),
+             @"seconds" : @(seconds),
+             @"centiseconds" : @(centiseconds),
+             };
 }
 
 #pragma mark - UITableViewDataSource
@@ -145,7 +195,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-[cell.textLabel setText:self.lapTimeArray.count > 0 ? self.lapTimeArray[indexPath.row] : @""];    return cell;
+    [cell.textLabel setText:self.lapTimeArray.count > 0 ? self.lapTimeArray[indexPath.row] : @""];
+    return cell;
 }
 
 @end
