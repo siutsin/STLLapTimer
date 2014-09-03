@@ -127,12 +127,12 @@
 
 - (NSString *)stringFromTimeInterval:(NSTimeInterval)interval
 {
-    DLog(@"interval: %f", interval);
-    NSInteger ti = (NSInteger)interval;
-    NSInteger seconds = ti % 60;
-    NSInteger minutes = (ti / 60) % 60;
-    NSInteger hours = (ti / 3600);
-    return [NSString stringWithFormat:@"Lap: %ld Time: %02ld:%02ld:%02ld", (long)self.lapCounter, (long)hours, (long)minutes, (long)seconds];
+    double ti = (double)interval;
+    NSInteger minutes = ((NSInteger)ti / 60) % 60;
+    NSInteger seconds = (NSInteger)ti % 60;
+    NSInteger centiseconds = roundf(fmod(ti, 1) * 100);
+    
+    return [NSString stringWithFormat:@"Lap: %ld Time: %02ld:%02ld:%02ld", (long)self.lapCounter, (long)minutes, (long)seconds, (long)centiseconds];
 }
 
 #pragma mark - UITableViewDataSource
