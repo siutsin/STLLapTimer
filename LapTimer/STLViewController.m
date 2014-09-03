@@ -62,11 +62,6 @@
     [self _setupMotionDetector];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.videoCamera stopCameraCapture];
