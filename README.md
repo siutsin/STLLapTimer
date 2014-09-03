@@ -13,6 +13,7 @@ Please open the project with Xcode 6 or above.
 ## Libraries
 
 [GPUImage](https://github.com/BradLarson/GPUImage)
+
 [libextobjc](https://github.com/jspahrsummers/libextobjc)
 
 ## Author
