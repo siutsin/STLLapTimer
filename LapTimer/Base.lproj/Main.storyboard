@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="HGn-EW-DaM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="HGn-EW-DaM">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <scenes>
-        <!--Lap Timer-->
+        <!--View Controller-->
         <scene sceneID="jlu-1g-PBl">
             <objects>
                 <tableViewController id="Wbv-Qq-2fu" customClass="STLViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wOT-al-edJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="lTK-pa-Han" customClass="GPUImageView">
+                            <rect key="frame" x="0.0" y="64" width="600" height="90"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="KYG-0o-uHb">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -25,17 +31,43 @@
                             <outlet property="delegate" destination="Wbv-Qq-2fu" id="Xx5-Ki-515"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Lap Timer" id="O4Y-yJ-rf0">
+                    <navigationItem key="navigationItem" id="O4Y-yJ-rf0">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="79K-Wp-Ygk">
+                            <rect key="frame" x="180" y="6" width="240" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQR-aD-tMz">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="33"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="TQR-aD-tMz" firstAttribute="leading" secondItem="79K-Wp-Ygk" secondAttribute="leading" id="1wa-LA-Jlj"/>
+                                <constraint firstAttribute="bottom" secondItem="TQR-aD-tMz" secondAttribute="bottom" id="Ad6-hm-6zl"/>
+                                <constraint firstAttribute="centerX" secondItem="TQR-aD-tMz" secondAttribute="centerX" id="XM3-h5-fVU"/>
+                                <constraint firstAttribute="trailing" secondItem="TQR-aD-tMz" secondAttribute="trailing" id="iL1-BA-yk2"/>
+                                <constraint firstItem="TQR-aD-tMz" firstAttribute="top" secondItem="79K-Wp-Ygk" secondAttribute="top" id="nOY-n2-cIS"/>
+                                <constraint firstAttribute="centerY" secondItem="TQR-aD-tMz" secondAttribute="centerY" id="q07-nc-Ntd"/>
+                            </constraints>
+                        </view>
                         <barButtonItem key="rightBarButtonItem" title="Reset" id="CwB-zL-Got">
                             <connections>
                                 <action selector="didClickReset:" destination="Wbv-Qq-2fu" id="Hf6-Z0-rbw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="filterView" destination="lTK-pa-Han" id="hVA-9Z-JPZ"/>
+                        <outlet property="titleTimerLabel" destination="TQR-aD-tMz" id="RNk-Of-4nI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CU6-OH-QQE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="960" y="481"/>
+            <point key="canvasLocation" x="1800" y="508.09859154929575"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PwA-0C-imZ">
@@ -53,15 +85,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wx8-gT-aY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="428" y="481"/>
+            <point key="canvasLocation" x="802.5" y="508.09859154929575"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4">
-            <size key="portraitSize" width="320" height="568"/>
-            <size key="landscapeSize" width="568" height="320"/>
-        </simulatedScreenMetrics>
-    </simulatedMetricsContainer>
 </document>

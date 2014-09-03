@@ -11,11 +11,13 @@
 
 @interface STLViewController ()
 
+@property (weak, nonatomic) IBOutlet GPUImageView *filterView;
+@property (weak, nonatomic) IBOutlet UILabel *titleTimerLabel;
+
 @property (strong, nonatomic) GPUImageVideoCamera *videoCamera;
 @property (strong, nonatomic) NSDate *startTime;
 @property (strong, nonatomic) NSMutableArray *lapTimeArray;
 @property (strong, nonatomic) NSTimer *timer;
-@property (strong, nonatomic) UILabel *titleTimerLabel;
 @property (nonatomic, getter=isCoolingDown) BOOL cooldown;
 @property (nonatomic) NSInteger lapCounter;
 
@@ -54,10 +56,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [self _setupTitleTimer];
     
     [self _setupMotionDetector];
-    
-    [self _setupTitleTimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -71,6 +73,11 @@
     }
     
     [super viewWillDisappear:animated];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    self.videoCamera.outputImageOrientation = [[UIApplication sharedApplication] statusBarOrientation];
 }
 
 #pragma mark - Interaction
@@ -89,8 +96,9 @@
 
 - (void)_setupMotionDetector
 {
+    if (self.videoCamera) return;
     self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset352x288 cameraPosition:AVCaptureDevicePositionBack];
-    self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
+    self.videoCamera.outputImageOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     GPUImageMotionDetector *filter = [[GPUImageMotionDetector alloc] init];
     @weakify(self)
     [(GPUImageMotionDetector *) filter setMotionDetectionBlock:^(CGPoint motionCentroid, CGFloat motionIntensity, CMTime frameTime)
@@ -99,6 +107,7 @@
         if (motionIntensity > self.sensitivity) [self lap];
     }];
     [self.videoCamera addTarget:filter];
+    [self.videoCamera addTarget:self.filterView];
     [self.videoCamera startCameraCapture];
 }
 
@@ -136,13 +145,6 @@
 - (void)_setupTitleTimer
 {
     if (self.timer) [self.timer invalidate];
-    if (!self.titleTimerLabel)
-    {
-        self.titleTimerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
-        [self.titleTimerLabel setText:@"Lap Timer"];
-        [self.titleTimerLabel setTextAlignment:NSTextAlignmentCenter];
-        self.navigationItem.titleView = self.titleTimerLabel;
-    }
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(_updateTimer:) userInfo:nil repeats:YES];
 }
 
