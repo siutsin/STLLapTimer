@@ -37,6 +37,8 @@
 /* Begin PBXFileReference section */
 		4EA4D4628A8F462E8BF21C3C /* Pods-LapTimer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LapTimer.xcconfig"; path = "Pods/Pods-LapTimer.xcconfig"; sourceTree = "<group>"; };
 		56BE462334D34C95B156584C /* libPods-LapTimer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LapTimer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E00C0BD519B70140006F178F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		E00C0BD719B7015A006F178F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E0F6E50119B4561900DE7973 /* LapTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LapTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F6E50419B4561900DE7973 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E0F6E50619B4561900DE7973 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -86,6 +88,8 @@
 		E0F6E4F819B4561900DE7973 = {
 			isa = PBXGroup;
 			children = (
+				E00C0BD519B70140006F178F /* LICENSE */,
+				E00C0BD719B7015A006F178F /* README.md */,
 				E0F6E50A19B4561900DE7973 /* LapTimer */,
 				E0F6E52919B4561900DE7973 /* LapTimerTests */,
 				E0F6E50319B4561900DE7973 /* Frameworks */,
