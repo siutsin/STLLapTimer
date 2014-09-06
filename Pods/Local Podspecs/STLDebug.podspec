@@ -20,9 +20,9 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/siutsin/STLDebug"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
-  s.author           = { "Simon Li" => "simon824@gmail.com" }
+  s.author           = { "Simon Li" => "" }
   s.source           = { :git => "https://github.com/siutsin/STLDebug.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/simon__li'
+  s.social_media_url = 'https://twitter.com/simon__li'
 
   s.platform     = :ios, '6.0'
   s.requires_arc = true
