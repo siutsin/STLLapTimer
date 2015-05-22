@@ -8,6 +8,7 @@
 
 #import "STLViewController.h"
 #import <GPUImage.h>
+#import <EXTScope.h>
 
 @interface STLViewController ()
 
