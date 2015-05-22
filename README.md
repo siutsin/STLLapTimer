@@ -1,5 +1,4 @@
 # STLLapTimer
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/siutsin/STLLapTimer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 App for tracking mini4WD/slotcar lap times using an iPhone/iPad's camera inspired by [Pimentoso's project](https://github.com/Pimentoso/AndroidLapTimer).
 
@@ -25,4 +24,4 @@ Please open the project with Xcode 6 or above.
 
 ## License
 
-STLDebug is available under the MIT license. See the LICENSE file for more info.
+STLDebug is available under the [MIT license](http://siutsin.mit-license.org). See the LICENSE file for more info.
