@@ -185,6 +185,7 @@
 				E0F6E53919B4584000DE7973 /* ShellScript */,
 				E0F6E4FF19B4561900DE7973 /* Resources */,
 				584E58D97BF64810A8C4FF4B /* Copy Pods Resources */,
+				F133AF83CCFC2FA050F43A3C /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -220,7 +221,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = STL;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Simon Li";
 				TargetAttributes = {
 					E0F6E52119B4561900DE7973 = {
@@ -312,6 +313,21 @@
 			shellPath = /bin/bash;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
+		F133AF83CCFC2FA050F43A3C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LapTimer/Pods-LapTimer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -389,6 +405,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -450,6 +467,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LapTimer/LapTimer-Prefix.pch";
 				INFOPLIST_FILE = "LapTimer/LapTimer-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.siutsin.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -464,6 +482,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LapTimer/LapTimer-Prefix.pch";
 				INFOPLIST_FILE = "LapTimer/LapTimer-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.siutsin.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -474,7 +493,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LapTimer.app/LapTimer";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
@@ -485,6 +503,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "LapTimerTests/LapTimerTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.siutsin.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -496,13 +515,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LapTimer.app/LapTimer";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LapTimer/LapTimer-Prefix.pch";
 				INFOPLIST_FILE = "LapTimerTests/LapTimerTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.siutsin.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
