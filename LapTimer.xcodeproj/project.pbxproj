@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BA419364E9A4485BAEABF8C4 /* libPods-LapTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BE462334D34C95B156584C /* libPods-LapTimer.a */; };
+		E00287A51BCB90E800E8E631 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = E00287A41BCB90E800E8E631 /* .travis.yml */; settings = {ASSET_TAGS = (); }; };
 		E0F6E50519B4561900DE7973 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F6E50419B4561900DE7973 /* Foundation.framework */; };
 		E0F6E50719B4561900DE7973 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F6E50619B4561900DE7973 /* CoreGraphics.framework */; };
 		E0F6E50919B4561900DE7973 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F6E50819B4561900DE7973 /* UIKit.framework */; };
@@ -38,6 +39,7 @@
 		00AF93A783B8565F72317356 /* Pods-LapTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LapTimer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LapTimer/Pods-LapTimer.debug.xcconfig"; sourceTree = "<group>"; };
 		56BE462334D34C95B156584C /* libPods-LapTimer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LapTimer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C614EF1FFFBB7FC61CA82EFA /* Pods-LapTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LapTimer.release.xcconfig"; path = "Pods/Target Support Files/Pods-LapTimer/Pods-LapTimer.release.xcconfig"; sourceTree = "<group>"; };
+		E00287A41BCB90E800E8E631 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		E00C0BD519B70140006F178F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E00C0BD719B7015A006F178F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E0F6E50119B4561900DE7973 /* LapTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LapTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +100,7 @@
 		E0F6E4F819B4561900DE7973 = {
 			isa = PBXGroup;
 			children = (
+				E00287A41BCB90E800E8E631 /* .travis.yml */,
 				E00C0BD519B70140006F178F /* LICENSE */,
 				E00C0BD719B7015A006F178F /* README.md */,
 				E0F6E50A19B4561900DE7973 /* LapTimer */,
@@ -185,6 +188,7 @@
 				E0F6E53919B4584000DE7973 /* ShellScript */,
 				E0F6E4FF19B4561900DE7973 /* Resources */,
 				584E58D97BF64810A8C4FF4B /* Copy Pods Resources */,
+				F133AF83CCFC2FA050F43A3C /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -220,7 +224,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = STL;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Simon Li";
 				TargetAttributes = {
 					E0F6E52119B4561900DE7973 = {
@@ -254,6 +258,7 @@
 			files = (
 				E0F6E51D19B4561900DE7973 /* Images.xcassets in Resources */,
 				E0F6E50F19B4561900DE7973 /* InfoPlist.strings in Resources */,
+				E00287A51BCB90E800E8E631 /* .travis.yml in Resources */,
 				E0F6E51819B4561900DE7973 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +316,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
+		F133AF83CCFC2FA050F43A3C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LapTimer/Pods-LapTimer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -389,6 +409,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -450,6 +471,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LapTimer/LapTimer-Prefix.pch";
 				INFOPLIST_FILE = "LapTimer/LapTimer-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.siutsin.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -464,6 +486,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LapTimer/LapTimer-Prefix.pch";
 				INFOPLIST_FILE = "LapTimer/LapTimer-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.siutsin.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -474,7 +497,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LapTimer.app/LapTimer";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
@@ -485,6 +507,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "LapTimerTests/LapTimerTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.siutsin.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -496,13 +519,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LapTimer.app/LapTimer";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LapTimer/LapTimer-Prefix.pch";
 				INFOPLIST_FILE = "LapTimerTests/LapTimerTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.siutsin.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
