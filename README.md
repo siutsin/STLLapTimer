@@ -28,3 +28,6 @@ Please open the project with Xcode 6 or above.
 ## License
 
 STLDebug is available under the [MIT license](http://siutsin.mit-license.org). See the LICENSE file for more info.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/siutsin/stllaptimer/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
